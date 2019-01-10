@@ -18,15 +18,18 @@
         <properties/>
         <border type="none"/>
         <children>
-          <component id="c3a54" class="javax.swing.JLabel">
+          <component id="c3a54" class="javax.swing.JLabel" binding="playerOneLabel">
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <background color="-16777151"/>
+              <enabled value="true"/>
+              <foreground color="-16776961"/>
               <text value="Player One"/>
             </properties>
           </component>
-          <component id="f803f" class="javax.swing.JLabel">
+          <component id="f803f" class="javax.swing.JLabel" binding="playerTwoLabel">
             <constraints>
               <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -34,7 +37,7 @@
               <text value="Player Two"/>
             </properties>
           </component>
-          <component id="b3040" class="javax.swing.JLabel">
+          <component id="b3040" class="javax.swing.JLabel" binding="playerThreeLabel">
             <constraints>
               <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>

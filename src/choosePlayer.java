@@ -19,7 +19,7 @@ public class choosePlayer {
                 count++;
             }
 
-        launchGame();
+            launchGame();
         });
         player2CheckBox.addActionListener(e -> {
             JCheckBox jCheckBox = (JCheckBox)e.getSource();

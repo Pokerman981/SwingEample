@@ -7,6 +7,9 @@ public class mainForm {
 
     public static JFrame jFrame;
     public JPanel panel1;
+    private JLabel playerOneLabel;
+    private JLabel playerTwoLabel;
+    private JLabel playerThreeLabel;
     private JTextField textField1;
     private JTextField textField2;
     private JTextField textField3;
@@ -77,9 +80,9 @@ public class mainForm {
 
     private JButton startANewGameButton;
 
-    int player1 = 0;
-    int player2 = 1;
-    int player3 = 1;
+    int playerOne = 0;
+    int playerTwo = 1;
+    int playerThree = 1;
 
     public mainForm() {
         ActionListener listener = new ActionListener() {
@@ -92,33 +95,39 @@ public class mainForm {
                     return;
                 }
 
-                if (player1 == 0) {
+                if (playerOne == 0) {
                     Color color = new Color(0, 0, 255);
                     clickedButton.setBackground(color);
+                    playerOneLabel.setForeground(new Color(0, 0, 0));
+                    playerTwoLabel.setForeground(new Color(0, 255, 0));
 
-                    player1 = 1;
-                    player2 = 0;
-                    player3 = 1;
+                    playerOne = 1;
+                    playerTwo = 0;
+                    playerThree = 1;
                     return;
                 }
 
-                if (player2 == 0) {
+                if (playerTwo == 0) {
                     Color color = new Color(0, 255, 0);
                     clickedButton.setBackground(color);
+                    playerTwoLabel.setForeground(new Color(0, 0, 0));
+                    playerThreeLabel.setForeground(new Color(255, 0, 0));
 
-                    player1 = 1;
-                    player2 = 1;
-                    player3 = 0;
+                    playerOne = 1;
+                    playerTwo = 1;
+                    playerThree = 0;
                     return;
                 }
 
-                if (player3 == 0) {
+                if (playerThree == 0) {
                     Color color = new Color(255, 0, 0);
                     clickedButton.setBackground(color);
+                    playerThreeLabel.setForeground(new Color(0, 0, 0));
+                    playerOneLabel.setForeground(new Color(0, 0, 255));
 
-                    player1 = 0;
-                    player2 = 1;
-                    player3 = 1;
+                    playerOne = 0;
+                    playerTwo = 1;
+                    playerThree = 1;
                     return;
                 }
             }
