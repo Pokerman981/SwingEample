@@ -1,18 +1,11 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class mainForm {
 
-    public static void main(String[] args) {
-        JFrame jFrame = new JFrame("mainForm");
-        jFrame.setContentPane(new mainForm().panel1);
-        jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        jFrame.pack();
-        jFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        jFrame.setVisible(true);
-    }
-
+    private static JFrame jFrame;
     private JPanel panel1;
     private JTextField textField1;
     private JTextField textField2;
@@ -53,10 +46,180 @@ public class mainForm {
     private JButton button34;
     private JButton button35;
     private JButton button36;
+    private JButton startANewGameButton;
     private JButton button37;
+    private JButton button38;
+    private JButton button39;
+    private JButton button40;
+    private JButton button41;
+    private JButton button42;
+    private JButton button43;
+    private JButton button44;
+    private JButton button45;
+    private JButton button46;
+    private JButton button47;
+    private JButton button48;
+    private JButton button49;
+    private JButton button50;
+    private JButton button51;
+    private JButton button52;
+    private JButton button53;
+    private JButton button54;
+    private JButton button55;
+    private JButton button56;
+    private JButton button57;
+    private JButton button58;
+    private JButton button59;
+    private JButton button60;
+    private JButton button61;
+    private JButton button62;
+    private JButton button63;
+    private JButton button64;
 
+        public static void main(String[] args) {
+            jFrame = new JFrame("mainForm");
+            jFrame.setContentPane(new mainForm().panel1);
+            jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            jFrame.setResizable(false);
+            jFrame.pack();
+            jFrame.setVisible(true);
+        }                                                                                                                                                                     
+
+
+    int player1 = 0;
+    int player2 = 1;
+    int player3 = 1;
 
     public mainForm() {
 
+        ActionListener listener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JButton clickedButton = (JButton) e.getSource();
+                int rgb = clickedButton.getBackground().getRGB();
+                if (rgb == -16776961 || rgb == -16711936 || rgb == -65536) {
+                    JOptionPane.showMessageDialog(null, "This spot has already been selected!");
+                    return;
+                }
+
+                if (player1 == 0) {
+                    Color color = new Color(0, 0, 255);
+                    clickedButton.setBackground(color);
+
+                    player1 = 1;
+                    player2 = 0;
+                    player3 = 1;
+                    return;
+                }
+
+                if (player2 == 0) {
+                    Color color = new Color(0, 255, 0);
+                    clickedButton.setBackground(color);
+
+                    player1 = 1;
+                    player2 = 1;
+                    player3 = 0;
+                    return;
+                }
+
+                if (player3 == 0) {
+                    Color color = new Color(255, 0, 0);
+                    clickedButton.setBackground(color);
+
+                    player1 = 0;
+                    player2 = 1;
+                    player3 = 1;
+                    return;
+                }
+            }
+        };
+
+        registerListeners(listener);
+
+        startANewGameButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                jFrame.setVisible(false);
+                jFrame = new JFrame("Connect Four");
+                jFrame.setContentPane(new mainForm().panel1);
+                jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                jFrame.setResizable(false);
+                jFrame.pack();
+                jFrame.setVisible(true);
+            }
+        });
+    }
+
+    public void registerListeners(ActionListener listener) {
+        button1.addActionListener(listener);
+        button2.addActionListener(listener);
+        button3.addActionListener(listener);
+        button4.addActionListener(listener);
+        button5.addActionListener(listener);
+        button6.addActionListener(listener);
+        button7.addActionListener(listener);
+        button8.addActionListener(listener);
+        button9.addActionListener(listener);
+        button10.addActionListener(listener);
+        button11.addActionListener(listener);
+        button12.addActionListener(listener);
+        button13.addActionListener(listener);
+        button14.addActionListener(listener);
+        button15.addActionListener(listener);
+        button16.addActionListener(listener);
+        button17.addActionListener(listener);
+        button18.addActionListener(listener);
+        button19.addActionListener(listener);
+        button20.addActionListener(listener);
+        button21.addActionListener(listener);
+        button22.addActionListener(listener);
+        button23.addActionListener(listener);
+        button24.addActionListener(listener);
+        button25.addActionListener(listener);
+        button26.addActionListener(listener);
+        button27.addActionListener(listener);
+        button28.addActionListener(listener);
+        button29.addActionListener(listener);
+        button30.addActionListener(listener);
+        button31.addActionListener(listener);
+        button32.addActionListener(listener);
+        button33.addActionListener(listener);
+        button34.addActionListener(listener);
+        button35.addActionListener(listener);
+        button36.addActionListener(listener);
+        button37.addActionListener(listener);
+        button38.addActionListener(listener);
+        button39.addActionListener(listener);
+        button40.addActionListener(listener);
+        button41.addActionListener(listener);
+        button42.addActionListener(listener);
+        button43.addActionListener(listener);
+        button44.addActionListener(listener);
+        button45.addActionListener(listener);
+        button46.addActionListener(listener);
+        button47.addActionListener(listener);
+        button48.addActionListener(listener);
+        button49.addActionListener(listener);
+        button50.addActionListener(listener);
+        button51.addActionListener(listener);
+        button52.addActionListener(listener);
+        button53.addActionListener(listener);
+        button54.addActionListener(listener);
+        button55.addActionListener(listener);
+        button56.addActionListener(listener);
+        button57.addActionListener(listener);
+        button58.addActionListener(listener);
+        button59.addActionListener(listener);
+        button60.addActionListener(listener);
+        button61.addActionListener(listener);
+        button62.addActionListener(listener);
+        button63.addActionListener(listener);
+        button64.addActionListener(listener);
+
+
     }
 }
+
+
+
+
