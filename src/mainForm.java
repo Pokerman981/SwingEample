@@ -5,8 +5,8 @@ import java.awt.event.ActionListener;
 
 public class mainForm {
 
-    private static JFrame jFrame;
-    private JPanel panel1;
+    public static JFrame jFrame;
+    public JPanel panel1;
     private JTextField textField1;
     private JTextField textField2;
     private JTextField textField3;
@@ -46,7 +46,6 @@ public class mainForm {
     private JButton button34;
     private JButton button35;
     private JButton button36;
-    private JButton startANewGameButton;
     private JButton button37;
     private JButton button38;
     private JButton button39;
@@ -76,22 +75,13 @@ public class mainForm {
     private JButton button63;
     private JButton button64;
 
-        public static void main(String[] args) {
-            jFrame = new JFrame("mainForm");
-            jFrame.setContentPane(new mainForm().panel1);
-            jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            jFrame.setResizable(false);
-            jFrame.pack();
-            jFrame.setVisible(true);
-        }                                                                                                                                                                     
-
+    private JButton startANewGameButton;
 
     int player1 = 0;
     int player2 = 1;
     int player3 = 1;
 
     public mainForm() {
-
         ActionListener listener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
