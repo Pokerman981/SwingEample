@@ -1,7 +1,4 @@
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
 
 public class choosePlayer {
     public static JFrame jFrame;
@@ -43,12 +40,12 @@ public class choosePlayer {
 
     public void launchGame() {
         if (count > 2) {
-            mainForm.jFrame = new JFrame("mainForm");
-            mainForm.jFrame.setContentPane(new mainForm().panel1);
-            mainForm.jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            mainForm.jFrame.setResizable(false);
-            mainForm.jFrame.pack();
-            mainForm.jFrame.setVisible(true);
+            ConnectFour.jFrame = new JFrame("ConnectFour");
+            ConnectFour.jFrame.setContentPane(new ConnectFour().panel1);
+            ConnectFour.jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            ConnectFour.jFrame.setResizable(false);
+            ConnectFour.jFrame.pack();
+            ConnectFour.jFrame.setVisible(true);
 
             choosePlayer.jFrame.setVisible(false);
             choosePlayer.jFrame.dispose();
