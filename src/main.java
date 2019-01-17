@@ -1,3 +1,9 @@
+/*
+ * Developed by Troy Gidney on 1/17/19 8:11 AM.
+ * Last modified 1/17/19 7:59 AM.
+ * Copyright (c) 2019. All rights reserved
+ */
+
 import javax.swing.*;
 
 public class main {

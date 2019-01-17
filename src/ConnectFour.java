@@ -1,3 +1,9 @@
+/*
+ * Developed by Troy Gidney on 1/17/19 8:12 AM.
+ * Last modified 1/17/19 7:59 AM.
+ * Copyright (c) 2019. All rights reserved
+ */
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -202,7 +208,7 @@ public class ConnectFour {
 
         int count = 0;
 
-
+        //Horizontal
         List<JButton> row1 = jButtonList.subList(0,9);
         for (JButton jButton : row1) {
             currentRGB = jButton.getBackground().getRGB();
@@ -364,19 +370,20 @@ public class ConnectFour {
             }
         }
 
-        {
+        {//Reset the variables
             currentRGB = -2;
             lastRGB = -1;
             count = 0;
         }
 
+        //Vertical
         int clickButtonInt = Integer.valueOf(buttonClicked.getName()) % 8;
         if (clickButtonInt == 0) {
             clickButtonInt = 8;
         }
 
 
-        List<JButton> col1 = new ArrayList<>();
+        List<JButton> col = new ArrayList<>();
         {
             for (int i = 0; i < 9; i++) {
 
@@ -384,14 +391,14 @@ public class ConnectFour {
                     break;
                 }
 
-                col1.add(jButtonList.get(clickButtonInt-1));
+                col.add(jButtonList.get(clickButtonInt-1));
                 clickButtonInt = clickButtonInt + 8;
                 if (clickButtonInt > 64) {
                     break;
                 }
             }
 
-            for (JButton jButton : col1) {
+            for (JButton jButton : col) {
                 currentRGB = jButton.getBackground().getRGB();
 
                 //Utils.messageConsole(currentRGB);
@@ -429,6 +436,172 @@ public class ConnectFour {
 
             }
         }
+
+
+
+        //Diagonal Top-To-Left
+        {
+            List<JButton> diag1 = new ArrayList<>();
+            {
+                diag1.add(jButtonList.get(3));
+                diag1.add(jButtonList.get(10));
+                diag1.add(jButtonList.get(17));
+                diag1.add(jButtonList.get(24));
+            }
+
+            List<JButton> diag2 = new ArrayList<>();
+            {
+                diag2.add(jButtonList.get(4));
+                diag2.add(jButtonList.get(11));
+                diag2.add(jButtonList.get(18));
+                diag2.add(jButtonList.get(25));
+                diag2.add(jButtonList.get(32));
+            }
+
+            List<JButton> diag3 = new ArrayList<>();
+            {
+                diag3.add(jButtonList.get(5));
+                diag3.add(jButtonList.get(12));
+                diag3.add(jButtonList.get(19));
+                diag3.add(jButtonList.get(26));
+                diag3.add(jButtonList.get(33));
+                diag3.add(jButtonList.get(40));
+            }
+
+            List<JButton> diag4 = new ArrayList<>();
+            {
+                diag4.add(jButtonList.get(6));
+                diag4.add(jButtonList.get(13));
+                diag4.add(jButtonList.get(20));
+                diag4.add(jButtonList.get(27));
+                diag4.add(jButtonList.get(34));
+                diag4.add(jButtonList.get(41));
+                diag4.add(jButtonList.get(48));
+            }
+
+            List<JButton> diag5 = new ArrayList<>();
+            {
+                diag5.add(jButtonList.get(7));
+                diag5.add(jButtonList.get(14));
+                diag5.add(jButtonList.get(21));
+                diag5.add(jButtonList.get(28));
+                diag5.add(jButtonList.get(35));
+                diag5.add(jButtonList.get(42));
+                diag5.add(jButtonList.get(49));
+                diag5.add(jButtonList.get(56));
+            }
+
+            List<JButton> diag6 = new ArrayList<>();
+            {
+                diag6.add(jButtonList.get(15));
+                diag6.add(jButtonList.get(22));
+                diag6.add(jButtonList.get(29));
+                diag6.add(jButtonList.get(36));
+                diag6.add(jButtonList.get(43));
+                diag6.add(jButtonList.get(50));
+                diag6.add(jButtonList.get(57));
+            }
+
+            List<JButton> diag7 = new ArrayList<>();
+            {
+                diag7.add(jButtonList.get(23));
+                diag7.add(jButtonList.get(30));
+                diag7.add(jButtonList.get(37));
+                diag7.add(jButtonList.get(44));
+                diag7.add(jButtonList.get(51));
+                diag7.add(jButtonList.get(58));
+            }
+
+            List<JButton> diag8 = new ArrayList<>();
+            {
+                diag8.add(jButtonList.get(31));
+                diag8.add(jButtonList.get(38));
+                diag8.add(jButtonList.get(46));
+                diag8.add(jButtonList.get(52));
+                diag8.add(jButtonList.get(59));
+            }
+            //TODO Add the rest of the diag lines
+
+        }
+
+        //Diagonal Top-To-Left
+        {
+            List<JButton> diag1 = new ArrayList<>();
+            {
+                diag1.add(jButtonList.get(4));
+                diag1.add(jButtonList.get(13));
+                diag1.add(jButtonList.get(22));
+                diag1.add(jButtonList.get(31));
+            }
+
+            List<JButton> diag2 = new ArrayList<>();
+            {
+                diag2.add(jButtonList.get(3));
+                diag2.add(jButtonList.get(12));
+                diag2.add(jButtonList.get(21));
+                diag2.add(jButtonList.get(30));
+                diag2.add(jButtonList.get(39));
+            }
+
+            List<JButton> diag3 = new ArrayList<>();
+            {
+                diag3.add(jButtonList.get(2));
+                diag3.add(jButtonList.get(11));
+                diag3.add(jButtonList.get(20));
+                diag3.add(jButtonList.get(29));
+                diag3.add(jButtonList.get(38));
+                diag3.add(jButtonList.get(47));
+            }
+
+            List<JButton> diag4 = new ArrayList<>();
+            {
+                diag4.add(jButtonList.get(1));
+                diag4.add(jButtonList.get(10));
+                diag4.add(jButtonList.get(19));
+                diag4.add(jButtonList.get(28));
+                diag4.add(jButtonList.get(37));
+                diag4.add(jButtonList.get(46));
+                diag4.add(jButtonList.get(55));
+            }
+
+            List<JButton> diag5 = new ArrayList<>();
+            {
+                diag5.add(jButtonList.get(0));
+                diag5.add(jButtonList.get(9));
+                diag5.add(jButtonList.get(18));
+                diag5.add(jButtonList.get(27));
+                diag5.add(jButtonList.get(36));
+                diag5.add(jButtonList.get(45));
+                diag5.add(jButtonList.get(54));
+                diag5.add(jButtonList.get(63));
+            }
+
+            List<JButton> diag6 = new ArrayList<>();
+            {
+                diag6.add(jButtonList.get(8));
+                diag6.add(jButtonList.get(17));
+                diag6.add(jButtonList.get(26));
+                diag6.add(jButtonList.get(35));
+                diag6.add(jButtonList.get(44));
+                diag6.add(jButtonList.get(53));
+                diag6.add(jButtonList.get(62));
+            }
+
+            List<JButton> diag7 = new ArrayList<>();
+            {
+                diag7.add(jButtonList.get(16));
+                diag7.add(jButtonList.get(25));
+                diag7.add(jButtonList.get(34));
+                diag7.add(jButtonList.get(43));
+                diag7.add(jButtonList.get(52));
+                diag7.add(jButtonList.get(61));
+            }
+
+            //TODO Add the rest of the diag lines
+
+
+        }
+
     }
 
 
