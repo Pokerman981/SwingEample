@@ -9,7 +9,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class ConnectFour {
@@ -92,6 +91,10 @@ public class ConnectFour {
 
     private JButton startANewGameButton;
 
+    private List<List<JButton>> checkWinVertHori = new ArrayList<>();
+    private List<List<JButton>> checkWinTopToLeft = new ArrayList<>();
+    private List<List<JButton>> checkWinTopToRight = new ArrayList<>();
+
     int playerOne = 0;
     int playerTwo = 1;
     int playerThree = 1;
@@ -107,10 +110,10 @@ public class ConnectFour {
                 boolean textField2Filled = textField2.getText().isEmpty();
                 boolean textField3Filled = textField3.getText().isEmpty();
 
-                /*if (textField1Filled || textField2Filled || textField3Filled) {
-                *    JOptionPane.showMessageDialog(null, "All players must enter their name!");
-                *    return;
-                }*/
+                if (textField1Filled || textField2Filled || textField3Filled) {
+                    JOptionPane.showMessageDialog(null, "All players must enter their name!");
+                    return;
+                }
 
                 if (rgb == -16776961 || rgb == -16711936 || rgb == -65536) {
                     JOptionPane.showMessageDialog(null, "This spot has already been selected!");
@@ -155,14 +158,6 @@ public class ConnectFour {
             }
         };
 
-        /*int count = 0;
-        getButtonList();
-        for (JButton jButton : jButtonList) {
-            jButton.addActionListener(listener);
-            jButton.setName(String.valueOf(count+1));
-            count++;
-        }*/
-
         getButtonList();
         setNames();
         registerButtonListener();
@@ -185,259 +180,68 @@ public class ConnectFour {
         });
     }
 
-    public void setNames() {
-        for (int i = 0; i < jButtonList.size(); i++) {
-            jButtonList.get(i).setName(String.valueOf(i+1));
-        }
-    }
-
-    public void registerButtonListener() {
-        for (JButton jButton1 : jButtonList) {
-            jButton1.addActionListener(listener);
-        }
-    }
-
     public void checkWin(JButton buttonClicked) {
         int player1RGB = -16776961;
         int player2RGB = -16711936;
         int player3RGB = -65536;
         int blank = -1118482;
 
-        int currentRGB;
-        int lastRGB = -1;
-
-        int count = 0;
-
         //Horizontal
-        List<JButton> row1 = jButtonList.subList(0,9);
-        for (JButton jButton : row1) {
-            currentRGB = jButton.getBackground().getRGB();
-
-            if (lastRGB == -1 && currentRGB != blank) {
-                lastRGB = currentRGB;
+        {
+            int clickButtonInt = Integer.valueOf(buttonClicked.getName());
+            if (clickButtonInt <= 8) {
+                List<JButton> row = jButtonList.subList(0, 9);
+                checkWinVertHori.add(row);
+            } else if (clickButtonInt <= 16) {
+                List<JButton> row = jButtonList.subList(8, 17);
+                checkWinVertHori.add(row);
+            } else if (clickButtonInt <= 24) {
+                List<JButton> row = jButtonList.subList(16, 25);
+                checkWinVertHori.add(row);
+            } else if (clickButtonInt <= 32) {
+                List<JButton> row = jButtonList.subList(24, 33);
+                checkWinVertHori.add(row);
+            } else if (clickButtonInt <= 40) {
+                List<JButton> row = jButtonList.subList(32, 41);
+                checkWinVertHori.add(row);
+            } else if (clickButtonInt <= 48) {
+                List<JButton> row = jButtonList.subList(40, 49);
+                checkWinVertHori.add(row);
+            } else if (clickButtonInt <= 56) {
+                List<JButton> row = jButtonList.subList(48, 57);
+                checkWinVertHori.add(row);
+            } else if (clickButtonInt <=64) {
+                List<JButton> row = jButtonList.subList(56, 64);
+                checkWinVertHori.add(row);
             }
-
-            if (lastRGB == currentRGB && currentRGB != blank) {
-                count++;
-            } else {
-                count = 1;
-                lastRGB = currentRGB;
-            }
-
-            if (count == 4) {
-                Utils.messageConsole(count);
-            }
-
-        }
-
-        List<JButton> row2 = jButtonList.subList(8,17);
-        for (JButton jButton : row2) {
-            currentRGB = jButton.getBackground().getRGB();
-
-            if (lastRGB == -1 && currentRGB != blank) {
-                lastRGB = currentRGB;
-            }
-
-            if (lastRGB == currentRGB && currentRGB != blank) {
-                count++;
-            } else {
-                count = 1;
-                lastRGB = currentRGB;
-            }
-
-            if (count == 4) {
-                Utils.messageConsole(count);
-            }
-        }
-
-        List<JButton> row3 = jButtonList.subList(16,25);
-        for (JButton jButton : row3) {
-            currentRGB = jButton.getBackground().getRGB();
-
-            if (lastRGB == -1 && currentRGB != blank) {
-                lastRGB = currentRGB;
-            }
-
-            if (lastRGB == currentRGB && currentRGB != blank) {
-                count++;
-            } else {
-                count = 1;
-                lastRGB = currentRGB;
-            }
-
-            if (count == 4) {
-                Utils.messageConsole(count);
-            }
-        }
-
-        List<JButton> row4 = jButtonList.subList(24,33);
-        for (JButton jButton : row4) {
-            currentRGB = jButton.getBackground().getRGB();
-
-            if (lastRGB == -1 && currentRGB != blank) {
-                lastRGB = currentRGB;
-            }
-
-            if (lastRGB == currentRGB && currentRGB != blank) {
-                count++;
-            } else {
-                count = 1;
-                lastRGB = currentRGB;
-            }
-
-            if (count == 4) {
-                Utils.messageConsole(count);
-            }
-        }
-
-        List<JButton> row5 = jButtonList.subList(32,41);
-        for (JButton jButton : row5) {
-            currentRGB = jButton.getBackground().getRGB();
-
-            if (lastRGB == -1 && currentRGB != blank) {
-                lastRGB = currentRGB;
-            }
-
-            if (lastRGB == currentRGB && currentRGB != blank) {
-                count++;
-            } else {
-                count = 1;
-                lastRGB = currentRGB;
-            }
-
-            if (count == 4) {
-                Utils.messageConsole(count);
-            }
-        }
-
-        List<JButton> row6 = jButtonList.subList(40,49);
-        for (JButton jButton : row6) {
-            currentRGB = jButton.getBackground().getRGB();
-
-            if (lastRGB == -1 && currentRGB != blank) {
-                lastRGB = currentRGB;
-            }
-
-            if (lastRGB == currentRGB && currentRGB != blank) {
-                count++;
-            } else {
-                count = 1;
-                lastRGB = currentRGB;
-            }
-
-            if (count == 4) {
-                Utils.messageConsole(count);
-            }
-        }
-
-        List<JButton> row7 = jButtonList.subList(48,57);
-        for (JButton jButton : row7) {
-            currentRGB = jButton.getBackground().getRGB();
-
-            if (lastRGB == -1 && currentRGB != blank) {
-                lastRGB = currentRGB;
-            }
-
-            if (lastRGB == currentRGB && currentRGB != blank) {
-                count++;
-            } else {
-                count = 1;
-                lastRGB = currentRGB;
-            }
-
-            if (count == 4) {
-                Utils.messageConsole(count);
-            }
-        }
-
-        List<JButton> row8 = jButtonList.subList(56,64);
-        for (JButton jButton : row8) {
-            currentRGB = jButton.getBackground().getRGB();
-
-            if (lastRGB == -1 && currentRGB != blank) {
-                lastRGB = currentRGB;
-            }
-
-            if (lastRGB == currentRGB && currentRGB != blank) {
-                count++;
-            } else {
-                count = 1;
-                lastRGB = currentRGB;
-            }
-
-            if (count == 4) {
-                Utils.messageConsole(count);
-            }
-        }
-
-        {//Reset the variables
-            currentRGB = -2;
-            lastRGB = -1;
-            count = 0;
         }
 
         //Vertical
-        int clickButtonInt = Integer.valueOf(buttonClicked.getName()) % 8;
-        if (clickButtonInt == 0) {
-            clickButtonInt = 8;
-        }
-
-
-        List<JButton> col = new ArrayList<>();
         {
-            for (int i = 0; i < 9; i++) {
-
-                if (clickButtonInt > 64) {
-                    break;
-                }
-
-                col.add(jButtonList.get(clickButtonInt-1));
-                clickButtonInt = clickButtonInt + 8;
-                if (clickButtonInt > 64) {
-                    break;
-                }
+            int clickButtonIntVert = Integer.valueOf(buttonClicked.getName()) % 8;
+            if (clickButtonIntVert == 0) {
+                clickButtonIntVert = 8;
             }
 
-            for (JButton jButton : col) {
-                currentRGB = jButton.getBackground().getRGB();
 
-                //Utils.messageConsole(currentRGB);
+            List<JButton> col = new ArrayList<>();
+            {
+                for (int i = 0; i < 9; i++) {
 
-                if (lastRGB == -1 && currentRGB != blank) {
-                    lastRGB = currentRGB;
+                    if (clickButtonIntVert > 64) {
+                        break;
+                    }
+
+                    col.add(jButtonList.get(clickButtonIntVert - 1));
+                    clickButtonIntVert = clickButtonIntVert + 8;
+                    if (clickButtonIntVert > 64) {
+                        break;
+                    }
                 }
 
-                if (lastRGB == currentRGB && currentRGB != blank) {
-                    count++;
-                } else {
-                    count = 1;
-                    lastRGB = currentRGB;
-                }
-
-                if (count == 4) { //This is vert win area
-                    if (lastRGB == player1RGB) {
-                        JOptionPane.showMessageDialog(null, "Player 1 Wins!");
-                    }
-
-                    if (lastRGB == player2RGB) {
-                        JOptionPane.showMessageDialog(null, "Player 2 Wins!");
-                    }
-
-                    if (lastRGB == player3RGB) {
-                        JOptionPane.showMessageDialog(null, "Player 3 Wins!");
-                    }
-
-
-                    for (JButton jButton1 : jButtonList) {
-                        jButton1.setEnabled(false);
-                    }
-
-                }
-
+                checkWinVertHori.add(col);
             }
         }
-
-
 
         //Diagonal Top-To-Left
         {
@@ -516,15 +320,32 @@ public class ConnectFour {
             {
                 diag8.add(jButtonList.get(31));
                 diag8.add(jButtonList.get(38));
-                diag8.add(jButtonList.get(46));
+                diag8.add(jButtonList.get(45));
                 diag8.add(jButtonList.get(52));
                 diag8.add(jButtonList.get(59));
             }
-            //TODO Add the rest of the diag lines
+
+            List<JButton> diag9 = new ArrayList<>();
+            {
+                diag9.add(jButtonList.get(39));
+                diag9.add(jButtonList.get(46));
+                diag9.add(jButtonList.get(53));
+                diag9.add(jButtonList.get(60));
+            }
+
+            checkWinTopToLeft.add(diag1);
+            checkWinTopToLeft.add(diag2);
+            checkWinTopToLeft.add(diag3);
+            checkWinTopToLeft.add(diag4);
+            checkWinTopToLeft.add(diag5);
+            checkWinTopToLeft.add(diag6);
+            checkWinTopToLeft.add(diag7);
+            checkWinTopToLeft.add(diag8);
+            checkWinTopToLeft.add(diag9);
 
         }
 
-        //Diagonal Top-To-Left
+        //Diagonal Top-To-Right
         {
             List<JButton> diag1 = new ArrayList<>();
             {
@@ -597,10 +418,165 @@ public class ConnectFour {
                 diag7.add(jButtonList.get(61));
             }
 
-            //TODO Add the rest of the diag lines
+            List<JButton> diag8 = new ArrayList<>();
+            {
+                diag8.add(jButtonList.get(24));
+                diag8.add(jButtonList.get(33));
+                diag8.add(jButtonList.get(42));
+                diag8.add(jButtonList.get(51));
+                diag8.add(jButtonList.get(60));
+            }
+
+            List<JButton> diag9 = new ArrayList<>();
+            {
+                diag9.add(jButtonList.get(32));
+                diag9.add(jButtonList.get(41));
+                diag9.add(jButtonList.get(50));
+                diag9.add(jButtonList.get(59));
+            }
+
+            checkWinTopToRight.add(diag1);
+            checkWinTopToRight.add(diag2);
+            checkWinTopToRight.add(diag3);
+            checkWinTopToRight.add(diag4);
+            checkWinTopToRight.add(diag5);
+            checkWinTopToRight.add(diag6);
+            checkWinTopToRight.add(diag7);
+            checkWinTopToRight.add(diag8);
+            checkWinTopToRight.add(diag9);
 
 
         }
+
+        for (List<JButton> jButtonList : checkWinVertHori) {
+            int currentRGB;
+            int lastRGB = -1;
+
+            int count = 0;
+
+            for (JButton jButton : jButtonList) {
+                currentRGB = jButton.getBackground().getRGB();
+
+                if (lastRGB == -1 && currentRGB != blank) {
+                    lastRGB = currentRGB;
+                }
+
+                if (lastRGB == currentRGB && currentRGB != blank) {
+                    count++;
+                } else {
+                    count = 1;
+                    lastRGB = currentRGB;
+                }
+
+                if (count == 4) { //This is vert win area
+                    if (lastRGB == player1RGB) {
+                        JOptionPane.showMessageDialog(null, "Player 1 Wins! Hori Vert");
+                    }
+
+                    if (lastRGB == player2RGB) {
+                        JOptionPane.showMessageDialog(null, "Player 2 Wins!");
+                    }
+
+                    if (lastRGB == player3RGB) {
+                        JOptionPane.showMessageDialog(null, "Player 3 Wins!");
+                    }
+
+
+                    for (JButton jButton1 : this.jButtonList) {
+                        jButton1.setEnabled(false);
+                    }
+
+                }
+            }
+        }
+
+        for (List<JButton> jButtonList : checkWinTopToRight) {
+            int currentRGB;
+            int lastRGB = -1;
+
+            int count = 0;
+
+            for (JButton jButton : jButtonList) {
+                currentRGB = jButton.getBackground().getRGB();
+
+                if (lastRGB == -1 && currentRGB != blank) {
+                    lastRGB = currentRGB;
+                }
+
+                if (lastRGB == currentRGB && currentRGB != blank) {
+                    count++;
+                } else {
+                    count = 1;
+                    lastRGB = currentRGB;
+                }
+
+                if (count == 4) { //This is vert win area
+                    if (lastRGB == player1RGB) {
+                        JOptionPane.showMessageDialog(null, "Player 1 Wins! TopToRIght");
+                    }
+
+                    if (lastRGB == player2RGB) {
+                        JOptionPane.showMessageDialog(null, "Player 2 Wins!");
+                    }
+
+                    if (lastRGB == player3RGB) {
+                        JOptionPane.showMessageDialog(null, "Player 3 Wins!");
+                    }
+
+
+                    for (JButton jButton1 : this.jButtonList) {
+                        jButton1.setEnabled(false);
+                    }
+
+                }
+            }
+        }
+
+        for (List<JButton> jButtonList : checkWinTopToLeft) {
+            int currentRGB;
+            int lastRGB = -1;
+
+            int count = 0;
+
+            for (JButton jButton : jButtonList) {
+                currentRGB = jButton.getBackground().getRGB();
+
+                if (lastRGB == -1 && currentRGB != blank) {
+                    lastRGB = currentRGB;
+                }
+
+                if (lastRGB == currentRGB && currentRGB != blank) {
+                    count++;
+                } else {
+                    count = 1;
+                    lastRGB = currentRGB;
+                }
+
+                if (count == 4) { //This is vert win area
+                    if (lastRGB == player1RGB) {
+                        JOptionPane.showMessageDialog(null, "Player 1 Wins! TopTOLeft");
+                    }
+
+                    if (lastRGB == player2RGB) {
+                        JOptionPane.showMessageDialog(null, "Player 2 Wins!");
+                    }
+
+                    if (lastRGB == player3RGB) {
+                        JOptionPane.showMessageDialog(null, "Player 3 Wins!");
+                    }
+
+
+                    for (JButton jButton1 : this.jButtonList) {
+                        jButton1.setEnabled(false);
+                    }
+
+                }
+            }
+        }
+
+        checkWinVertHori.clear();
+        checkWinTopToRight.clear();
+        checkWinTopToLeft.clear();
 
     }
 
@@ -632,6 +608,51 @@ public class ConnectFour {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public void setNames() {
+        for (int i = 0; i < jButtonList.size(); i++) {
+            jButtonList.get(i).setName(String.valueOf(i+1));
+        }
+    }
+
+    public void registerButtonListener() {
+        for (JButton jButton1 : jButtonList) {
+            jButton1.addActionListener(listener);
+        }
+    }
 
     public void getButtonList() {
         jButtonList.add(button1);
@@ -700,7 +721,3 @@ public class ConnectFour {
         jButtonList.add(button64);
     }
 }
-
-
-
-

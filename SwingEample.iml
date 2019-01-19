@@ -1,5 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="IntelliGuard" name="Obfuscation">
+      <configuration>
+        <option name="yGuardJar" value="C:\Users\TroyG\IdeaProjects\SwingEample\yguard-2.6\lib\yguard.jar" />
+        <option name="inFile" value="C:\Users\TroyG\IdeaProjects\SwingEample\out\Obfuscate\ConnectFour.jar" />
+        <option name="outFile" value="C:\Users\TroyG\IdeaProjects\SwingEample\out\Obfuscate\ConnectFour-Obfs.jar" />
+        <option name="mainclass" value="main" />
+        <option name="jarConfig">
+          <JarConfig>
+            <option name="jarEntries">
+              <list>
+                <option value="C:\Users\TroyG\IdeaProjects\SwingEample\out\production\SwingEample" />
+              </list>
+            </option>
+            <option name="linkLibraries" value="/" />
+          </JarConfig>
+        </option>
+      </configuration>
+    </facet>
+  </component>
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$">
