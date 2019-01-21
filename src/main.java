@@ -13,8 +13,8 @@ public class main {
         ConnectFour.jFrame = new JFrame("Connect Four");
         ConnectFour.jFrame.setContentPane(new ConnectFour().panel1);
         ConnectFour.jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        ConnectFour.jFrame.setResizable(false);
-        ConnectFour.jFrame.setLocationRelativeTo(null);
+        //ConnectFour.jFrame.setResizable(false);
+        //ConnectFour.jFrame.setLocationRelativeTo(null);
         ConnectFour.jFrame.pack();
         ConnectFour.jFrame.setVisible(true);
     }
