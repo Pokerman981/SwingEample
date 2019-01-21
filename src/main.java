@@ -17,58 +17,6 @@ public class main {
         ConnectFour.jFrame.setLocationRelativeTo(null);
         ConnectFour.jFrame.pack();
         ConnectFour.jFrame.setVisible(true);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        /*
-        choosePlayer.jFrame = new JFrame("Choose your character");
-        choosePlayer.jFrame.setContentPane(new choosePlayer().JPanel);
-        choosePlayer.jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        choosePlayer.jFrame.setResizable(false);
-        choosePlayer.jFrame.pack();
-        choosePlayer.jFrame.setVisible(true);
-        */
     }
 
 }
