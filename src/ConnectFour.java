@@ -1,5 +1,5 @@
 /*
- * Developed by Troy Gidney on 1/17/19 8:12 AM.
+ * Developed by Troy Gidney (s0511527) on 1/17/19 8:12 AM.
  * Last modified 1/17/19 7:59 AM.
  * Copyright (c) 2019. All rights reserved
  */
@@ -11,8 +11,10 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+//GUI Class
 public class ConnectFour {
 
+    //GUI Object variables
     public static JFrame jFrame;
     public JPanel panel1;
     private JLabel playerOneLabel;
@@ -21,7 +23,6 @@ public class ConnectFour {
     private JTextField textField1;
     private JTextField textField2;
     private JTextField textField3;
-    private List<JButton> jButtonList = new ArrayList<>();
     private JButton button1;
     private JButton button2;
     private JButton button3;
@@ -87,106 +88,145 @@ public class ConnectFour {
     private JButton button63;
     private JButton button64;
 
+    //The action listener all the buttons are registered to.
     private ActionListener listener;
 
+    //Start new game button.
     private JButton startANewGameButton;
 
+    //A list of all the buttons on the board.
+    private List<JButton> jButtonList = new ArrayList<>();
+
+    //Lists that contains the buttons that must be checked.
     private List<List<JButton>> checkWinVertHori = new ArrayList<>();
     private List<List<JButton>> checkWinTopToLeft = new ArrayList<>();
     private List<List<JButton>> checkWinTopToRight = new ArrayList<>();
 
-    int playerOne = 0;
-    int playerTwo = 1;
-    int playerThree = 1;
+    //These are the variables that dictate whose turn it is. Uses int types in a boolean fassion.
+    private int playerOne = 0;
+    private int playerTwo = 1;
+    private int playerThree = 1;
 
-    public ConnectFour() {
-        $$$setupUI$$$();
+    //All the colors that are being used on the board
+    private Color blue = new Color(-16776961);
+    private Color red = new Color(-65536);
+    private Color green = new Color(-16711936);
+    private Color black = new Color(0, 0, 0);
+    private Color blank = new Color(-1118482);
+
+    public ConnectFour() {  //Constructor
+        $$$setupUI$$$(); //Auto gen-ed
 
 
-        listener = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JButton clickedButton = (JButton) e.getSource();
+        //This defines what will be called when the action aka button click happens.
+        listener = e -> onButtonClick(e);
 
-                int rgb = clickedButton.getBackground().getRGB();
-                boolean textField1Filled = textField1.getText().isEmpty();
-                boolean textField2Filled = textField2.getText().isEmpty();
-                boolean textField3Filled = textField3.getText().isEmpty();
-
-                if (textField1Filled || textField2Filled || textField3Filled) {
-                    JOptionPane.showMessageDialog(null, "All players must enter their name!");
-                    return;
-                }
-
-                if (rgb == -16776961 || rgb == -16711936 || rgb == -65536) {
-                    JOptionPane.showMessageDialog(null, "This spot has already been selected!");
-                    return;
-                }
-
-                if (playerOne == 0) {
-                    clickedButton.setBackground(new Color(0, 0, 255));
-                    playerOneLabel.setForeground(new Color(0, 0, 0));
-                    playerTwoLabel.setForeground(new Color(0, 255, 0));
-
-                    playerOne = 1;
-                    playerTwo = 0;
-                    playerThree = 1;
-                    checkWin(clickedButton);
-                    return;
-                }
-
-                if (playerTwo == 0) {
-                    clickedButton.setBackground(new Color(0, 255, 0));
-                    playerTwoLabel.setForeground(new Color(0, 0, 0));
-                    playerThreeLabel.setForeground(new Color(255, 0, 0));
-
-                    playerOne = 1;
-                    playerTwo = 1;
-                    playerThree = 0;
-                    checkWin(clickedButton);
-                    return;
-                }
-
-                if (playerThree == 0) {
-                    clickedButton.setBackground(new Color(255, 0, 0));
-                    playerThreeLabel.setForeground(new Color(0, 0, 0));
-                    playerOneLabel.setForeground(new Color(0, 0, 255));
-
-                    playerOne = 0;
-                    playerTwo = 1;
-                    playerThree = 1;
-                    checkWin(clickedButton);
-                    return;
-                }
-            }
-        };
-
+        /*
+         * Adding all the buttons to a list.
+         * Settings identifiers on the buttons in the form of setting names.
+         * Registering what action listener handles the event
+         */
         getButtonList();
         setNames();
         registerButtonListener();
 
 
-        startANewGameButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                jFrame.setVisible(false);
-                jFrame = new JFrame("Connect Four");
-                jFrame.setContentPane(new ConnectFour().panel1);
-                jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                jFrame.setResizable(false);
-                jFrame.pack();
-                jFrame.setVisible(true);
-            }
+        //Defining what happens when the reset button action event is called.
+        startANewGameButton.addActionListener(e -> {
+            jFrame.setVisible(false);
+            jFrame = new JFrame("Connect Four");
+            jFrame.setContentPane(new ConnectFour().panel1);
+            jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            jFrame.setResizable(false);
+            jFrame.pack();
+            jFrame.setVisible(true);
         });
     }
 
-    public void checkWin(JButton buttonClicked) {
-        int player1RGB = -16776961;
-        int player2RGB = -16711936;
-        int player3RGB = -65536;
-        int blank = -1118482;
+    //The method that is called when a button on the board is clicked
+    public void onButtonClick(ActionEvent e) {
 
-        //Horizontal
+        //This grabs which button is clicked so I'm able to gather the custom data stored on the object.
+        JButton clickedButton = (JButton) e.getSource();
+
+        //Getting the background color aka if someone has chosen that spot or not.
+        Color currentRGB = new Color(clickedButton.getBackground().getRGB());
+
+
+        //Checking if all players have put chosen their name
+        {
+            boolean isTextFieldsFilled = textField1.getText().isEmpty()
+                    || textField2.getText().isEmpty()
+                    || textField3.getText().isEmpty();
+
+            if (isTextFieldsFilled) {
+                JOptionPane.showMessageDialog(null, "All players must enter their name!");
+                return;
+            }
+        }
+
+        //Checking is the selected spot is already chosen
+        {
+            boolean isAlreadySelected = currentRGB.equals(blue)
+                    || currentRGB.equals(red)
+                    || currentRGB.equals(green);
+
+            if (isAlreadySelected) {
+                JOptionPane.showMessageDialog(null, "This spot has already been selected!"); //Displays message box
+                return;
+            }
+        }
+
+        //Checking if it's player ones turn
+        if (playerOne == 0) {
+            clickedButton.setBackground(blue); //Set background to color of player
+            playerOneLabel.setForeground(black); //Set players name to black indicating it is no long their turn
+            playerTwoLabel.setForeground(green); //Displaying whose turn is next
+
+            //Cycles whose turn it is
+            playerOne = 1;
+            playerTwo = 0;
+            playerThree = 1;
+            checkWin(clickedButton);
+            return;
+        }
+
+        //Referring to comments starting on line 180
+        if (playerTwo == 0) {
+            clickedButton.setBackground(green);
+            playerTwoLabel.setForeground(black);
+            playerThreeLabel.setForeground(red);
+
+            playerOne = 1;
+            playerTwo = 1;
+            playerThree = 0;
+            checkWin(clickedButton);
+            return;
+        }
+
+        //Referring to comments starting on line 180
+        if (playerThree == 0) {
+            clickedButton.setBackground(red);
+            playerThreeLabel.setForeground(black);
+            playerOneLabel.setForeground(blue);
+
+            playerOne = 0;
+            playerTwo = 1;
+            playerThree = 1;
+            checkWin(clickedButton);
+            return;
+        }
+    }
+
+    //Method to check who won
+    public void checkWin(JButton buttonClicked) {
+        //Converting colors to RGB int
+        int player1RGB = blue.getRGB();
+        int player2RGB = green.getRGB();
+        int player3RGB = red.getRGB();
+        int blank = this.blank.getRGB();
+
+        //Getting list of rows \ This could be done so much more efficiently but it works
         {
             int clickButtonInt = Integer.valueOf(buttonClicked.getName());
             if (clickButtonInt <= 8) {
@@ -216,8 +256,9 @@ public class ConnectFour {
             }
         }
 
-        //Vertical
+        //Getting list of columns
         {
+            //Getting the remainder of what button was selected so I'm able to grab the column more dynamically
             int clickButtonIntVert = Integer.valueOf(buttonClicked.getName()) % 8;
             if (clickButtonIntVert == 0) {
                 clickButtonIntVert = 8;
@@ -225,7 +266,7 @@ public class ConnectFour {
 
 
             List<JButton> col = new ArrayList<>();
-            {
+            { //Algorithm to figure out what buttons are in the column selected
                 for (int i = 0; i < 9; i++) {
 
                     if (clickButtonIntVert > 64) {
@@ -234,16 +275,13 @@ public class ConnectFour {
 
                     col.add(jButtonList.get(clickButtonIntVert - 1));
                     clickButtonIntVert = clickButtonIntVert + 8;
-                    if (clickButtonIntVert > 64) {
-                        break;
-                    }
                 }
 
                 checkWinVertHori.add(col);
             }
         }
 
-        //Diagonal Top-To-Left
+        //Getting list of top to left diagonal \ I had other things to do so I wasn't able to find the sweet spot for a algorithm for this but it works
         {
             List<JButton> diag1 = new ArrayList<>();
             {
@@ -345,7 +383,7 @@ public class ConnectFour {
 
         }
 
-        //Diagonal Top-To-Right
+        //Getting list of top to right diagonal \ I had other things to do so I wasn't able to find the sweet spot for a algorithm for this but it works
         {
             List<JButton> diag1 = new ArrayList<>();
             {
@@ -448,19 +486,24 @@ public class ConnectFour {
 
         }
 
+        //Enhanced for loop going through each list
         for (List<JButton> jButtonList : checkWinVertHori) {
+            //Defining variables
             int currentRGB;
             int lastRGB = -1;
-
             int count = 0;
 
+            //Enhanced for loop through every button in a list
             for (JButton jButton : jButtonList) {
+                //Setting the current rbg to the current element in the loop
                 currentRGB = jButton.getBackground().getRGB();
 
+                //Checking if this is the first time it's ran
                 if (lastRGB == -1 && currentRGB != blank) {
                     lastRGB = currentRGB;
                 }
 
+                //Checking if the last button background equals the current button and is not a blank spot
                 if (lastRGB == currentRGB && currentRGB != blank) {
                     count++;
                 } else {
@@ -468,6 +511,7 @@ public class ConnectFour {
                     lastRGB = currentRGB;
                 }
 
+                //If the count gets up to four inform the player who won then disable all the buttons on the board
                 if (count == 4) { //This is vert win area
                     if (lastRGB == player1RGB) {
                         JOptionPane.showMessageDialog(null, "Player 1 Wins!");
@@ -490,6 +534,7 @@ public class ConnectFour {
             }
         }
 
+        //The logic for the next four for loops is the same as above just different lists
         for (List<JButton> jButtonList : checkWinTopToRight) {
             int currentRGB;
             int lastRGB = -1;
@@ -574,25 +619,28 @@ public class ConnectFour {
             }
         }
 
+        //Clearing the lists so there is chance of data overlap
         checkWinVertHori.clear();
         checkWinTopToRight.clear();
         checkWinTopToLeft.clear();
 
     }
 
-
+    //Method to set identifiers on the buttons
     public void setNames() {
         for (int i = 0; i < jButtonList.size(); i++) {
             jButtonList.get(i).setName(String.valueOf(i + 1));
         }
     }
 
+    //Method to register the buttons to a listener
     public void registerButtonListener() {
         for (JButton jButton1 : jButtonList) {
             jButton1.addActionListener(listener);
         }
     }
 
+    //Adding all the buttons to a list
     public void getButtonList() {
         jButtonList.add(button1);
         jButtonList.add(button2);
@@ -1536,6 +1584,7 @@ public class ConnectFour {
         gbc.weightx = 1.0;
         gbc.weighty = 1.0;
         gbc.fill = GridBagConstraints.BOTH;
+        gbc.insets = new Insets(2, 3, 3, 3);
         panel1.add(panel4, gbc);
         startANewGameButton = new JButton();
         startANewGameButton.setText("Start a new Game");
@@ -1545,7 +1594,8 @@ public class ConnectFour {
         gbc.weightx = 1.0;
         gbc.weighty = 1.0;
         gbc.fill = GridBagConstraints.BOTH;
-        gbc.insets = new Insets(3, 0, 0, 0);
+        gbc.ipadx = 45;
+        gbc.ipady = 45;
         panel4.add(startANewGameButton, gbc);
     }
 
@@ -1555,7 +1605,6 @@ public class ConnectFour {
     public JComponent $$$getRootComponent$$$() {
         return panel1;
     }
-
 
 
 }
